@@ -7,7 +7,8 @@ import { sigin } from '../../services/firebase';
 import { Link as RouterLink } from 'react-router-dom';
 import { maxHeight, maxWidth } from '@material-ui/system';
 import logo from './../../../logo.svg';
-
+import { store } from 'react-notifications-component';
+import { Link } from 'react-router-dom';
 const myStyle = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -95,6 +96,13 @@ const myStyle = makeStyles(theme => ({
         width:'90%'
     }
 }));
+const notification = {
+    message: "Configurable",
+    type: "success",
+    container: "top-right",
+    animationIn: ["animated", "fadeIn"],
+    animationOut: ["animated", "fadeOut"]
+};
 const Link1 = React.forwardRef((props, ref) => (
     <RouterLink innerRef={ref} to="/login" {...props} />
 ));
@@ -106,15 +114,36 @@ function SiginComponent(props) {
     const [nombre, setNombre] = useState('');
     const [confirm, setConfirm] = useState('');
     const handleSubmit = (evt) => {
-        if (contra !== confirm) {
-            console.log('no coinciden');
+        if (contra !== confirm || nombre === '') {
+            store.addNotification({
+                ...notification,
+                message: 'Asegurese de llenar los campos correctamente',
+                type: 'danger'
+            })
         } else {
             sigin(correo, contra, nombre).then((u) => {
-                alert('registro exitoso');
+                store.addNotification({
+                    ...notification,
+                    message: 'Registro exitoso: ' + u.user.uid
+                })
                 props.setAuthentication(true);
                 sessionStorage.setItem('user',u.user.uid);
-            }).catch(e => {
-                alert(e)
+            }).catch(error => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode == 'auth/weak-password') {
+                    store.addNotification({
+                        ...notification,
+                        message: 'contraseña muy debil',
+                        type: 'danger'
+                    })
+                  } else {
+                    store.addNotification({
+                        ...notification,
+                        message: 'Error de registro, por favor intente nuevamente',
+                        type: 'danger'
+                    })
+                  }
             })
         }
         console.log(nombre)
@@ -126,7 +155,7 @@ function SiginComponent(props) {
         <div className={classes.root}>
             <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
                 <Paper className={classes.Paper}>
-                <img src={logo} className={classes.image} />
+                <Link to="/"><img src={logo} className={classes.image} /></Link>
                     <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup}>
                         <Grid item xs={12} sm={6} className={classes.buttonItem}>
                             <Button variant="contained" component={Link1} fullWidth className={classes.buttonGruopLogin}>

@@ -5,8 +5,11 @@ import Button from '@material-ui/core/Button';
 import { Typography, Box, Paper, TextField } from '@material-ui/core';
 import { login } from './../../services/firebase';
 import { Link as RouterLink } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import logo from './../../../logo.svg';
+import { store } from 'react-notifications-component';
 
 const myStyle = makeStyles(theme => ({
     root: {
@@ -81,8 +84,14 @@ const myStyle = makeStyles(theme => ({
 }));
 const Link1 = React.forwardRef((props, ref) => (
     <RouterLink innerRef={ref} to="/sigin" {...props} />
-  ));
-
+));
+const notification = {
+    message: "Configurable",
+    type: "success",
+    container: "top-right",
+    animationIn: ["animated", "fadeIn"],
+    animationOut: ["animated", "fadeOut"]
+};
 function LoginComponent(props) {
     const classes = myStyle();
     const [correo, setCorreo] = useState('');
@@ -90,22 +99,49 @@ function LoginComponent(props) {
     const handleSubmit = (evt) => {
         login(correo, contra)
             .then((u) => {
-                alert('Usuario autenticado');
+                store.addNotification({
+                    ...notification,
+                    message: 'Bienvenido: ' + u.user.uid
+                })
                 props.setAuthentication(true);
-                sessionStorage.setItem('user',u.user.uid); 
+                sessionStorage.setItem('user', u.user.uid);
             })
-            .catch(e => {
-                alert('Error de autenticacion')
-                console.log(e);
+            .catch(error => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode === 'auth/wrong-password') {
+                    store.addNotification({
+                        ...notification,
+                        message: 'Contraseña incorrecta',
+                        type: 'danger'
+                    })
+                }
+                if (errorCode === 'auth/user-not-found') {
+                    store.addNotification({
+                        ...notification,
+                        message: 'No existe el usuario',
+                        type: 'danger'
+                    })
+                }
+                if (errorCode === 'auth/invalid-email') {
+                    store.addNotification({
+                        ...notification,
+                        message: 'correo no valido',
+                        type: 'danger'
+                    })
+                }
+                
+                console.log(error);
             })
         console.log(correo);
         console.log(contra);
     }
+
     return (
         <div className={classes.root}>
             <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
                 <Paper className={classes.Paper}>
-                    <img src={logo} className={classes.image} />
+                    <Link to="/"><img src={logo} className={classes.image} /></Link>
                     <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup} xs={12}>
                         <Grid item xs={12} sm={6} className={classes.buttonItem}>
                             <Button variant="contained" fullWidth className={classes.buttonGruopLogin}>
@@ -141,11 +177,11 @@ function LoginComponent(props) {
                     </form>
                     <Box component="div" display="block" textAlign="end" className={classes.remember}>
                         <Typography variant="subtitle1" component="subtitle1">
-                        <Link to="/passwordrecovery">Recuperar contraseña</Link>
+                            <Link to="/passwordrecovery">Recuperar contraseña</Link>
                         </Typography>
                     </Box>
                     <Box component="div" display="block" className={classes.prueba}>
-                        <Button variant="container"  className={classes.loginButton} onClick={handleSubmit}>
+                        <Button variant="container" className={classes.loginButton} onClick={handleSubmit}>
                             Iniciar Sesión
                         </Button>
                     </Box>

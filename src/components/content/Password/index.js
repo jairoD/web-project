@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import { passwordRecovery } from './../../services/firebase';
 import swal from 'sweetalert';
 import logo from './../../../logo.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { store } from 'react-notifications-component';
 
 
 const myStyle = makeStyles(theme => ({
@@ -76,7 +77,13 @@ const myStyle = makeStyles(theme => ({
         fontWeight: 'bold',
     }
 }));
-
+const notification = {
+    message: "Configurable",
+    type: "success",
+    container: "top-right",
+    animationIn: ["animated", "fadeIn"],
+    animationOut: ["animated", "fadeOut"]
+};
 function sweetalertfunction() {
     console.log('button clicked')
     swal("Revise su email", "en pocos minutos su contraseña será enviada", "success");
@@ -96,7 +103,7 @@ function PasswordRecovery() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         setLoading(true);
-        if (email!=='') {
+        if (email !== '') {
             console.log(email);
             passwordRecovery(email)
                 .then(user => {
@@ -119,7 +126,11 @@ function PasswordRecovery() {
                     }, 2000);
                 });
         } else {
-            alert('correo no valido');
+            store.addNotification({
+                ...notification,
+                message: 'Correo no valido',
+                type: 'danger'
+            })
             setVariant('error');
             setMessage('Digite un correo');
             setOpen(true);
@@ -138,8 +149,7 @@ function PasswordRecovery() {
         <div className={classes.root}>
             <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
                 <Paper className={classes.Paper}>
-                    <img src={logo} className={classes.image} />
-
+                    <Link to="/"><img src={logo} className={classes.image} /></Link>
                     <form>
                         <TextField
                             id="standard-name"
@@ -150,7 +160,11 @@ function PasswordRecovery() {
                             type="email"
                             margin="normal"
                         />
-                        <Link to="/login">volver</Link>
+                        <Box component="div" display="block" textAlign="end" className={classes.remember}>
+                            <Typography variant="subtitle1" component="subtitle1">
+                                <Link to="/login">volver</Link>
+                            </Typography>
+                        </Box>
                         <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup} xs={12}>
                             <Button variant="contained" color="primary" className={classes.button} onClick={handleSubmit} >
                                 Enviar
