@@ -14,4 +14,3 @@ Esta es una aplicacion web diseñada para la creacion de torneos para diferentes
 
 ### - para ver una muestra de la aplicacion en produccion visite url: https://e-sport-web.firebaseapp.com
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
