@@ -1,10 +1,14 @@
 import React from 'react';
 
 
-function init_page() {
+
+function init_page(props) {
+    const signout = () => {
+        props.setAuthentication(false);
+      }
     return (
         <header className="App-header">
-
+            <button onClick={signout}>Logout</button>
             <p>
                 Edittt <code>src/App.js</code> and save to reload.
         </p>

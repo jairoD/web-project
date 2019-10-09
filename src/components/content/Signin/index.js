@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Typography, Box, Paper, TextField } from '@material-ui/core';
-import { login } from './../../services/firebase';
+import { sigin } from '../../services/firebase';
 import { Link as RouterLink } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { maxHeight, maxWidth } from '@material-ui/system';
 import logo from './../../../logo.svg';
 
 const myStyle = makeStyles(theme => ({
@@ -19,6 +19,7 @@ const myStyle = makeStyles(theme => ({
         color: theme.palette.text.secondary,
         padding: theme.spacing(3),
 
+
     },
     mainContainer: {
         height: '100%',
@@ -26,18 +27,19 @@ const myStyle = makeStyles(theme => ({
     buttonItem: {
         padding: theme.spacing(1)
     },
-    buttonGruopLogin: {
+    button: {
+        marginRight:'100px',
         fontWeight: 'bold',
         color: 'white',
         borderRadius: '100px',
         fontSize: '12px',
-        background: '#3b549c',
+        background: '#495f9e',
         '&:hover': {
             background: '#527aeb',
         },
 
     },
-    buttonGruopSign: {
+    buttonGruopLogin: {
         fontWeight: 'bold',
         color: 'white',
         borderRadius: '100px',
@@ -48,78 +50,108 @@ const myStyle = makeStyles(theme => ({
         },
 
     },
-    buttonGroup: {
-        paddingTop: '30px'
+    buttonGruopSign: {
+        fontWeight: 'bold',
+        color: 'white',
+        borderRadius: '100px',
+        fontSize: '12px',
+        background: '#3b549c',
+        '&:hover': {
+            background: '#527aeb',
+        },
+
     },
-    loginButton: {
+    siginButton: {
         background: '#2b55cc',
         fontWeight: 'bold',
         color: 'white',
         borderRadius: '100px',
         fontSize: '14px',
+        fontWeight: 'bold',
         '&:hover': {
             background: '#123597',
         },
         margin: '20px 0px',
         width: '60%'
     },
+    buttonGroup: {
+        marginRight: '100px',
+        paddingTop: '30px'
+    },
     image: {
         padding: '10px 0px',
         width: '250px'
     },
     textField: {
-        width: '90%',
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        display:'block',
     },
     remember: {
         marginRight: theme.spacing(1),
         textAlign: 'end',
         fontSize: '14px',
         fontWeight: 'bold',
+    },
+    form: {
+        width:'90%'
     }
 }));
 const Link1 = React.forwardRef((props, ref) => (
-    <RouterLink innerRef={ref} to="/sigin" {...props} />
-  ));
+    <RouterLink innerRef={ref} to="/login" {...props} />
+));
 
-function LoginComponent(props) {
+function SiginComponent(props) {
     const classes = myStyle();
     const [correo, setCorreo] = useState('');
     const [contra, setContra] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [confirm, setConfirm] = useState('');
     const handleSubmit = (evt) => {
-        login(correo, contra)
-            .then((u) => {
-                alert('Usuario autenticado');
+        if (contra !== confirm) {
+            console.log('no coinciden');
+        } else {
+            sigin(correo, contra, nombre).then((u) => {
+                alert('registro exitoso');
                 props.setAuthentication(true);
-                sessionStorage.setItem('user',u.user.uid); 
+                sessionStorage.setItem('user',u.user.uid);
+            }).catch(e => {
+                alert(e)
             })
-            .catch(e => {
-                alert('Error de autenticacion')
-                console.log(e);
-            })
+        }
+        console.log(nombre)
         console.log(correo);
         console.log(contra);
+        console.log(confirm);
     }
     return (
         <div className={classes.root}>
             <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
                 <Paper className={classes.Paper}>
-                    <img src={logo} className={classes.image} />
-                    <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup} xs={12}>
+                <img src={logo} className={classes.image} />
+                    <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup}>
                         <Grid item xs={12} sm={6} className={classes.buttonItem}>
-                            <Button variant="contained" fullWidth className={classes.buttonGruopLogin}>
+                            <Button variant="contained" component={Link1} fullWidth className={classes.buttonGruopLogin}>
                                 Usuario existente
                         </Button>
                         </Grid>
                         <Grid item xs={12} sm={6} className={classes.buttonItem}>
-                            <Button variant="contained" component={Link1} fullWidth color="primary" className={classes.buttonGruopSign}>
+                            <Button variant="contained" fullWidth color="primary" className={classes.buttonGruopSign}>
                                 Registrarse
                         </Button>
                         </Grid>
                     </Grid>
-                    <form>
+                    <Grid container justify="center" direction="column" alignItems="center">
+                    <form className={classes.form}>
                         <TextField
+                            fullWidth
+                            id="standard-name"
+                            label="Nombre completo"
+                            value={nombre}
+                            onChange={e => setNombre(e.target.value)}
+                            className={classes.textField}
+                            type="name"
+                            margin="normal"
+                        /><TextField
+                            fullWidth
                             id="standard-name"
                             label="Correo"
                             value={correo}
@@ -129,6 +161,7 @@ function LoginComponent(props) {
                             margin="normal"
                         />
                         <TextField
+                            fullWidth
                             id="standard-password-input"
                             label="contraseña"
                             className={classes.textField}
@@ -137,16 +170,23 @@ function LoginComponent(props) {
                             onChange={e => setContra(e.target.value)}
                             autoComplete="current-password"
                             margin="normal"
+                        /><TextField
+                            fullWidth
+                            id="standard-password-input"
+                            label="Confirmar contraseña"
+                            className={classes.textField}
+                            type="password"
+                            value={confirm}
+                            onChange={e => setConfirm(e.target.value)}
+                            autoComplete="current-password"
                         />
+
                     </form>
-                    <Box component="div" display="block" textAlign="end" className={classes.remember}>
-                        <Typography variant="subtitle1" component="subtitle1">
-                        <Link to="/passwordrecovery">Recuperar contraseña</Link>
-                        </Typography>
-                    </Box>
+                    </Grid>
+
                     <Box component="div" display="block" className={classes.prueba}>
-                        <Button variant="container"  className={classes.loginButton} onClick={handleSubmit}>
-                            Iniciar Sesión
+                        <Button variant="container" className={classes.siginButton} onClick={handleSubmit}>
+                            Registrarse
                         </Button>
                     </Box>
                 </Paper>
@@ -155,4 +195,4 @@ function LoginComponent(props) {
     );
 }
 
-export default LoginComponent;
+export default SiginComponent;
