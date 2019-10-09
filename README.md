@@ -7,7 +7,7 @@ Esta es una aplicacion web diseñada para la creacion de torneos para diferentes
 
 ### INSTRUCCIONES DE INSTALACION
 
-### - para le ejecucion de la aplicacion web localmente primero debera instalar todas las dependencias necesarias, ejecute el comando npm install en la terminal
+### - para le ejecucion de la aplicacion web localmente primero debera instalar todas las dependencias necesarias, ejecute el comando 'npm install' en la terminal
 
 ### - dentro del proyecto encontrara un archivo .env con los datos de conexion a firebase, por favor cree uno propio y no haga mal uso de los ya existentes
 
