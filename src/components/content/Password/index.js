@@ -61,10 +61,6 @@ const myStyle = makeStyles(theme => ({
         margin: '20px 0px',
         width: '60%'
     },
-    image: {
-        padding: '10px 0px',
-        width: '250px'
-    },
     textField: {
         width: '90%',
         marginLeft: theme.spacing(1),
