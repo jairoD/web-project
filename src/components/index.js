@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './../App.css';
+
 import Index from './layout/Index';
-import MainPage from './content/inicio';
+import MainLayout from './layout/MainLayout';
 import { signout } from './services/firebase';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
@@ -25,7 +25,7 @@ function App() {
     <ReactNotification />
       {
         isAuth ?
-          <MainPage setAuthentication={setAuthentication} />
+          <MainLayout setAuthentication={setAuthentication} />
           :
           <Index setAuthentication={setAuthentication} />
       }

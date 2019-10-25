@@ -3,9 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Typography, Box, Paper, TextField } from '@material-ui/core';
-import { sigin } from '../../services/firebase';
+import { sigin, addUser } from '../../services/firebase';
 import { Link as RouterLink } from 'react-router-dom';
-import { maxHeight, maxWidth } from '@material-ui/system';
 import logo from './../../../logo.svg';
 import { store } from 'react-notifications-component';
 import { Link } from 'react-router-dom';
@@ -122,12 +121,16 @@ function SiginComponent(props) {
             })
         } else {
             sigin(correo, contra, nombre).then((u) => {
-                store.addNotification({
-                    ...notification,
-                    message: 'Registro exitoso: ' + u.user.uid
-                })
-                props.setAuthentication(true);
-                sessionStorage.setItem('user',u.user.uid);
+                addUser(correo,nombre,u.user.uid).then(function(res){
+                    store.addNotification({
+                        ...notification,
+                        message: 'Registro exitoso: ' + u.user.uid
+                    });
+                    props.setAuthentication(true);
+                    sessionStorage.setItem('user',u.user.uid);
+                }).catch((error)=>{
+                    console.log(error);
+                });
             }).catch(error => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -146,10 +149,6 @@ function SiginComponent(props) {
                   }
             })
         }
-        console.log(nombre)
-        console.log(correo);
-        console.log(contra);
-        console.log(confirm);
     }
     return (
         <div className={classes.root}>

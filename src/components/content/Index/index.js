@@ -35,9 +35,7 @@ const useStyles = makeStyles(theme => ({
   const Link1 = React.forwardRef((props, ref) => (
     <RouterLink innerRef={ref} to="/sigin" {...props} />
   ));
-  const Link2 = React.forwardRef((props, ref) => (
-    <RouterLink innerRef={ref} to="/nosotros" {...props} />
-  ));
+  
 export default function AppBarIndex() {
     const classes = useStyles();
   
