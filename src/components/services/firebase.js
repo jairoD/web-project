@@ -40,7 +40,7 @@ export const addUser = (email, name, uid)=>{
   });
 }
 
-export let allUser = () =>{
+export const allUser = () =>{
   return db.collection('usuarios').get();
 }
 
