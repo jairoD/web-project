@@ -11,6 +11,8 @@ import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Todos from '../MainLayout/Todos';
+import {allUser} from './../../services/firebase';
+
 
 const drawerWidth = 240;
 const myStyles = makeStyles(theme => ({
@@ -67,6 +69,7 @@ const myStyles = makeStyles(theme => ({
     }
 
 }));
+
 function MainLayout(props) {
     const signout = () => {
         props.setAuthentication(false);
@@ -75,6 +78,13 @@ function MainLayout(props) {
     const classes = myStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    allUser().then(function (res) {
+        res.forEach(function (doc) {
+            console.log(doc.id, '->', doc.data().nombre, ' - ', doc.data().correo);
+
+        });
+    });;  
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -222,6 +232,7 @@ function MainLayout(props) {
         </Typography>
                 <h1>Listar</h1>
                  <Todos/>       
+                <p>Hola mundo</p>           
                 <button onClick={signout}>Logout</button>
             </main>
         </div>

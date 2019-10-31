@@ -3,6 +3,7 @@ import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/firestore';
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
@@ -42,3 +43,4 @@ export const addUser = (email, name, uid)=>{
 export let allUser = () =>{
   return db.collection('usuarios').get();
 }
+
