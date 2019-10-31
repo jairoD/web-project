@@ -79,12 +79,6 @@ function MainLayout(props) {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    allUser().then(function (res) {
-        res.forEach(function (doc) {
-            console.log(doc.id, '->', doc.data().nombre, ' - ', doc.data().correo);
-
-        });
-    });;  
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
