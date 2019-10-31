@@ -10,7 +10,7 @@ import {ReactComponent as IconTeam} from "./../../../icons/teamspeak-brands.svg"
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
+import Todos from '../MainLayout/Todos';
 
 const drawerWidth = 240;
 const myStyles = makeStyles(theme => ({
@@ -220,7 +220,8 @@ function MainLayout(props) {
                     eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
                     posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-                <p>Hola mundo</p>
+                <h1>Listar</h1>
+                 <Todos/>       
                 <button onClick={signout}>Logout</button>
             </main>
         </div>
