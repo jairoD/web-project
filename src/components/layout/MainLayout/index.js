@@ -5,25 +5,29 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
-import {ReactComponent as IconCup} from "./../../../icons/champion-cup.svg";
-import {ReactComponent as IconTeam} from "./../../../icons/teamspeak-brands.svg";
+import { ReactComponent as IconCup } from "./../../../icons/champion-cup.svg";
+import { ReactComponent as IconTeam } from "./../../../icons/teamspeak-brands.svg";
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { allUser, addUser2 } from './../../services/firebase';
+import ListaUsuarios from './../../content/listado/index';
+import Perfil from './../../content/Perfil';
+import { Link, Redirect } from 'react-router-dom';
 
 
 const drawerWidth = 240;
 const myStyles = makeStyles(theme => ({
     root: {
         display: "flex",
-        
+
     },
     drawer: {
         [theme.breakpoints.up("sm")]: {
             width: drawerWidth,
             flexShrink: 0,
         },
-        
+
     },
     appBar: {
         marginLeft: drawerWidth,
@@ -38,36 +42,38 @@ const myStyles = makeStyles(theme => ({
         }
     },
     toolbar: theme.mixins.toolbar,
-    userInfoCont:{
+    userInfoCont: {
         backgroundColor: '#106cc8',
         height: '64px',
-        width:'100%',
+        width: '100%',
         textAlign: 'center',
         display: 'table',
         position: 'absolute'
     },
     drawerPaper: {
         width: drawerWidth,
-        borderRight :'1px solid rgb(0, 0, 0)',
+        borderRight: '1px solid rgb(0, 0, 0)',
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing(3)
     },
-    icon:{
+    icon: {
         color: 'black',
-        width : '30px',
+        width: '30px',
         height: '30px'
     },
-    userName:{
+    userName: {
         display: 'table-cell',
         verticalAlign: 'middle',
         color: 'white',
-        
+
     }
 
 }));
+
 function MainLayout(props) {
+
     const signout = () => {
         props.setAuthentication(false);
     }
@@ -75,23 +81,31 @@ function MainLayout(props) {
     const classes = myStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
+    const [usuarios, setUsuarios] = React.useState(0);
+    const example = () => {
+        addUser2().then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
+    }
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
     const drawer = (
         <div>
-            
+
             <div className={classes.toolbar} >
                 <div className={classes.userInfoCont}>
                     <Typography subtitle1 className={classes.userName}>
-                    Username
+                        Username
                     </Typography>
                 </div>
             </div>
-            
-            
+
+
             <List>
                 {/**
                 {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -105,7 +119,7 @@ function MainLayout(props) {
                  */}
                 <ListItem button key={"Mis Torneos"}>
                     <ListItemIcon>
-                        <IconCup height="30px" width="30px" fill="black"/>
+                        <IconCup height="30px" width="30px" fill="black" />
                     </ListItemIcon>
                     <ListItemText primary="Mis Torneos" />
                 </ListItem>
@@ -117,19 +131,19 @@ function MainLayout(props) {
                 </ListItem>
                 <ListItem button key={"Crear Torneo"}>
                     <ListItemIcon>
-                        <CreateOutlinedIcon className={classes.icon}/>
+                        <CreateOutlinedIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Crear Torneo" />
                 </ListItem>
                 <ListItem button key={"Editar perfil"}>
                     <ListItemIcon>
-                        <SettingsIcon className={classes.icon}/>
+                        <SettingsIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Editar Perfil" />
                 </ListItem>
                 <ListItem button key={"Cerrar sesión"}>
                     <ListItemIcon>
-                        <ExitToAppIcon className={classes.icon}/>
+                        <ExitToAppIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Cerrar sesión" onClick={signout} />
                 </ListItem>
@@ -140,7 +154,7 @@ function MainLayout(props) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            
+
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <IconButton
@@ -191,7 +205,19 @@ function MainLayout(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
+                {/*<ListaUsuarios />*/}
+                <Perfil/>
+                <button onClick={addUser2}>Añadir Usuario</button>
+            </main>
+        </div>
+    );
+}
+
+export default MainLayout;
+
+
+{/**
+<Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
                     dolor purus non enim praesent elementum facilisis leo vel. Risus at
@@ -205,26 +231,4 @@ function MainLayout(props) {
                     vivamus at augue. At augue eget arcu dictum varius duis at consectetur
                     lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
                     faucibus et molestie ac.
-        </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-                    ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-                    elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-                    sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-                    mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-                    risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-                    purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-                    tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-                    morbi tristique senectus et. Adipiscing elit duis tristique
-                    sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-                <p>Hola mundo</p>
-                <button onClick={signout}>Logout</button>
-            </main>
-        </div>
-    );
-}
-
-export default MainLayout;
+        </Typography> */}

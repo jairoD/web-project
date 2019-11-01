@@ -107,11 +107,13 @@ const Link1 = React.forwardRef((props, ref) => (
 ));
 
 function SiginComponent(props) {
+    
     const classes = myStyle();
     const [correo, setCorreo] = useState('');
     const [contra, setContra] = useState('');
     const [nombre, setNombre] = useState('');
     const [confirm, setConfirm] = useState('');
+    
     const handleSubmit = (evt) => {
         if (contra !== confirm || nombre === '') {
             store.addNotification({

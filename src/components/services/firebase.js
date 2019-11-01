@@ -36,3 +36,19 @@ export const addUser = (email, name, uid)=>{
     nombre: name
   });
 }
+export const addUser2 = ()=>{
+  return db.collection('usuarios').add({
+    correo: 'example@example.com',
+    nombre: 'ejemplo'
+  });
+}
+export const getUser = (uid) =>{
+  return db.collection('usuarios').doc(uid);
+}
+export const allUser = () =>{
+  return db.collection('usuarios');
+}
+
+export const updateUser=(uid)=>{
+  return db.collection('usuarios').doc(uid);
+}

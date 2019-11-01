@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Typography, Box, Paper, TextField } from '@material-ui/core';
 import { login } from './../../services/firebase';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -105,6 +105,7 @@ function LoginComponent(props) {
                 })
                 props.setAuthentication(true);
                 sessionStorage.setItem('user', u.user.uid);
+                window.location.href ="/home";
             })
             .catch(error => {
                 var errorCode = error.code;
