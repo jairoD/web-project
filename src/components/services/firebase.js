@@ -45,10 +45,10 @@ export const addUser2 = ()=>{
 export const getUser = (uid) =>{
   return db.collection('usuarios').doc(uid);
 }
+
+export const updateUser = (uid) => {
+  return db.collection('usuarios').doc(uid);
+}
 export const allUser = () =>{
   return db.collection('usuarios');
-}
-
-export const updateUser=(uid)=>{
-  return db.collection('usuarios').doc(uid);
 }

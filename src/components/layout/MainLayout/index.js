@@ -207,7 +207,7 @@ function MainLayout(props) {
                 <div className={classes.toolbar} />
                 {/*<ListaUsuarios />*/}
                 <Perfil/>
-                <button onClick={addUser2}>Añadir Usuario</button>
+                {/* <button onClick={addUser2}>Añadir Usuario</button> */}
             </main>
         </div>
     );
