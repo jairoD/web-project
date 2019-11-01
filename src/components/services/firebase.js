@@ -2,7 +2,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/auth';
-import 'firebase/firestore'
+import 'firebase/firestore';
+import 'firebase/firestore';
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
@@ -15,7 +16,9 @@ const app = firebase.initializeApp({
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-
+/*db.settings({
+  timestampsInSnapshots:true
+});*/
 
 export const login = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password);
@@ -36,3 +39,8 @@ export const addUser = (email, name, uid)=>{
     nombre: name
   });
 }
+
+export const allUser = () =>{
+  return db.collection('usuarios').get();
+}
+
