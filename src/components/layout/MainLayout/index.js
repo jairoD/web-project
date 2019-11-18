@@ -120,6 +120,7 @@ function MainLayout(props) {
         console.log(user.uid)
     });*/
 
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -346,4 +347,3 @@ function MainLayout(props) {
 }
 
 export default MainLayout;
-
