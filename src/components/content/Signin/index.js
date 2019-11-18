@@ -107,11 +107,13 @@ const Link1 = React.forwardRef((props, ref) => (
 ));
 
 function SiginComponent(props) {
+    
     const classes = myStyle();
     const [correo, setCorreo] = useState('');
     const [contra, setContra] = useState('');
     const [nombre, setNombre] = useState('');
     const [confirm, setConfirm] = useState('');
+    
     const handleSubmit = (evt) => {
         if (contra !== confirm || nombre === '') {
             store.addNotification({
@@ -134,7 +136,7 @@ function SiginComponent(props) {
             }).catch(error => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                if (errorCode == 'auth/weak-password') {
+                if (errorCode === 'auth/weak-password') {
                     store.addNotification({
                         ...notification,
                         message: 'contraseña muy debil',

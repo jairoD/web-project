@@ -40,7 +40,30 @@ export const addUser = (email, name, uid)=>{
   });
 }
 
-export const allUser = () =>{
-  return db.collection('usuarios').get();
+export const addUser2 = ()=>{
+  return db.collection('usuarios').add({
+    correo: 'example@example.com',
+    nombre: 'ejemplo'
+  });
 }
+export const getUser = (uid) =>{
+  return db.collection('usuarios').doc(uid);
+}
+
+export const updateUser = (uid) => {
+  return db.collection('usuarios').doc(uid);
+}
+export const allUser = () =>{
+  return db.collection('usuarios');
+}
+export const getAllGames = ()=>{
+  return db.collection('juegos');
+}
+export const userChanges = () =>{
+  return auth;
+}
+export const postTorneo = (torneo)=>{
+  return db.collection('torneos').add(torneo);
+}
+
 

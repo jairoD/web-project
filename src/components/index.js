@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 import Index from './layout/Index';
-import MainLayout from './layout/MainLayout';
+import Index2 from './layout/Index2';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { signout } from './services/firebase';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
+import { Provider, Consumer } from './AuthContext';
+
 
 function App() {
+  const uid = sessionStorage.getItem("user");
+  /** 
   const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
     const uid = sessionStorage.getItem("user");
@@ -17,19 +22,25 @@ function App() {
     if (!val) {
       signout();
       sessionStorage.clear();
+    } else {
     }
     setIsAuth(val);
   }
+  */
   return (
-    <main>
-    <ReactNotification />
-      {
-        isAuth ?
-          <MainLayout setAuthentication={setAuthentication} />
-          :
-          <Index setAuthentication={setAuthentication} />
-      }
-    </main>
+    <div>
+      <Provider>
+        <Consumer>
+          {({ isAuth }) => (
+            //condicional para evaluar el estado global
+            isAuth ?
+              <Index2 />
+              :
+              <Index />
+          )}
+        </Consumer>
+      </Provider>
+    </div>
   );
 
 }
