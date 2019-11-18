@@ -120,6 +120,7 @@ function MainLayout(props) {
         console.log(user.uid)
     });*/
 
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -363,4 +364,17 @@ export default MainLayout;
                     vivamus at augue. At augue eget arcu dictum varius duis at consectetur
                     lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
                     faucibus et molestie ac.
+
         </Typography> */}
+
+                <h1>Listar</h1>
+                 <Todos/>       
+                <p>Hola mundo</p>           
+                <button onClick={signout}>Logout</button>
+            </main>
+        </div>
+    );
+}
+
+export default MainLayout;
+
