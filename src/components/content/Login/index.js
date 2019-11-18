@@ -10,6 +10,7 @@ import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import logo from './../../../logo.svg';
 import { store } from 'react-notifications-component';
+import { Consumer } from '../../AuthContext';
 
 const myStyle = makeStyles(theme => ({
     root: {
@@ -96,16 +97,16 @@ function LoginComponent(props) {
     const classes = myStyle();
     const [correo, setCorreo] = useState('');
     const [contra, setContra] = useState('');
-    const handleSubmit = (evt) => {
+    const handleSubmit = (evt,setAuth) => {
         login(correo, contra)
             .then((u) => {
                 store.addNotification({
                     ...notification,
                     message: 'Bienvenido: ' + u.user.uid
                 })
-                props.setAuthentication(true);
+                console.log(u.user.uid);
                 sessionStorage.setItem('user', u.user.uid);
-                window.location.href ="/home";
+                setAuth(true);
             })
             .catch(error => {
                 var errorCode = error.code;
@@ -131,7 +132,7 @@ function LoginComponent(props) {
                         type: 'danger'
                     })
                 }
-                
+
                 console.log(error);
             })
         console.log(correo);
@@ -140,54 +141,61 @@ function LoginComponent(props) {
 
     return (
         <div className={classes.root}>
-            <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
-                <Paper className={classes.Paper}>
-                    <Link to="/"><img src={logo} className={classes.image} /></Link>
-                    <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup} xs={12}>
-                        <Grid item xs={12} sm={6} className={classes.buttonItem}>
-                            <Button variant="contained" fullWidth className={classes.buttonGruopLogin}>
-                                Usuario existente
+            <Consumer>
+                {({ setAuth }) => (
+                    <Grid container justify="center" direction="column" alignItems="center" className={classes.mainContainer} xs={12}>
+                        <Paper className={classes.Paper}>
+                            <Link to="/"><img src={logo} className={classes.image} /></Link>
+                            <Grid container justify="space-evenly" direction="row" alignItems="center" className={classes.buttonGroup} xs={12}>
+                                <Grid item xs={12} sm={6} className={classes.buttonItem}>
+                                    <Button variant="contained" fullWidth className={classes.buttonGruopLogin}>
+                                        Usuario existente
                         </Button>
-                        </Grid>
-                        <Grid item xs={12} sm={6} className={classes.buttonItem}>
-                            <Button variant="contained" component={Link1} fullWidth color="primary" className={classes.buttonGruopSign}>
-                                Registrarse
+                                </Grid>
+                                <Grid item xs={12} sm={6} className={classes.buttonItem}>
+                                    <Button variant="contained" component={Link1} fullWidth color="primary" className={classes.buttonGruopSign}>
+                                        Registrarse
                         </Button>
-                        </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <form>
+                                <TextField
+                                    id="standard-name"
+                                    label="Correo"
+                                    value={correo}
+                                    onChange={e => setCorreo(e.target.value)}
+                                    className={classes.textField}
+                                    type="email"
+                                    margin="normal"
+                                />
+                                <TextField
+                                    id="standard-password-input"
+                                    label="contraseña"
+                                    className={classes.textField}
+                                    type="password"
+                                    value={contra}
+                                    onChange={e => setContra(e.target.value)}
+                                    autoComplete="current-password"
+                                    margin="normal"
+                                />
+                            </form>
+
+                            <Box component="div" display="block" textAlign="end" className={classes.remember}>
+                                <Typography variant="subtitle1" component="subtitle1">
+                                    <Link to="/passwordrecovery">Recuperar contraseña</Link>
+                                </Typography>
+                            </Box>
+                            <Box component="div" display="block" className={classes.prueba}>
+                                <Button variant="container" className={classes.loginButton} onClick={e=>handleSubmit(e,setAuth)}>
+                                    Iniciar Sesión
+                        </Button>
+                            </Box>
+
+                        </Paper>
                     </Grid>
-                    <form>
-                        <TextField
-                            id="standard-name"
-                            label="Correo"
-                            value={correo}
-                            onChange={e => setCorreo(e.target.value)}
-                            className={classes.textField}
-                            type="email"
-                            margin="normal"
-                        />
-                        <TextField
-                            id="standard-password-input"
-                            label="contraseña"
-                            className={classes.textField}
-                            type="password"
-                            value={contra}
-                            onChange={e => setContra(e.target.value)}
-                            autoComplete="current-password"
-                            margin="normal"
-                        />
-                    </form>
-                    <Box component="div" display="block" textAlign="end" className={classes.remember}>
-                        <Typography variant="subtitle1" component="subtitle1">
-                            <Link to="/passwordrecovery">Recuperar contraseña</Link>
-                        </Typography>
-                    </Box>
-                    <Box component="div" display="block" className={classes.prueba}>
-                        <Button variant="container" className={classes.loginButton} onClick={handleSubmit}>
-                            Iniciar Sesión
-                        </Button>
-                    </Box>
-                </Paper>
-            </Grid>
+                )}
+            </Consumer>
         </div>
     );
 }

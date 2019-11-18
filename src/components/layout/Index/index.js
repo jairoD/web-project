@@ -7,17 +7,37 @@ import Section2 from '../../content/Section2';
 import PasswordRecovery from '../../content/Password';
 function LoginLayout(props) {
     return (
-        <main>
-            <BrowserRouter>
-                
-                <Route path="/" exact render={() => <IndexLayout />} />
-                <Route path="/login" render={() => <Login setAuthentication={props.setAuthentication} />} />
-                <Route path="/sigin" render={() => <Signin setAuthentication={props.setAuthentication} />} />
-                <Route path="/nosotros" component={Section2} />
-                <Route path="/passwordrecovery" component={PasswordRecovery} />
-            </BrowserRouter>
-        </main>
+        <BrowserRouter>
+            {console.log('Ruta no logeados')}
+            <Route exact path="/" render={() => <IndexLayout />} />
+            <Route exact path="/home">
+                <Redirect to={{
+                    pathname: "/",
+                }} />
+            </Route>
+            <Route exact path="/login" render={() => <Login  />} />
+            <Route exact path="/sigin" render={() => <Signin  />} />
+            <Route exact path="/nosotros" component={Section2} />
+            <Route exact path="/passwordrecovery" component={PasswordRecovery} />
+        </BrowserRouter>
+
+
     );
 }
 
 export default LoginLayout;
+{/** 
+            <BrowserRouter>
+            {console.log('usuario no storage')}
+                <Route exact path="/" render={() => <IndexLayout />} />
+                <Route exact path="/home">
+                    <Redirect to={{
+                        pathname: "/",
+                    }} />
+                </Route>
+                <Route exact path="/login" render={() => <Login setAuthentication={props.setAuthentication} />} />
+                <Route exact path="/sigin" render={() => <Signin setAuthentication={props.setAuthentication} />} />
+                <Route exact path="/nosotros" component={Section2} />
+                <Route exact path="/passwordrecovery" component={PasswordRecovery} />
+            </BrowserRouter>
+            */}

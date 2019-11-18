@@ -52,3 +52,12 @@ export const updateUser = (uid) => {
 export const allUser = () =>{
   return db.collection('usuarios');
 }
+export const getAllGames = ()=>{
+  return db.collection('juegos');
+}
+export const userChanges = () =>{
+  return auth;
+}
+export const postTorneo = (torneo)=>{
+  return db.collection('torneos').add(torneo);
+}

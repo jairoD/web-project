@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { makeStyles, useTheme, Divider, List, ListItem, ListItemIcon, ListItemText, CssBaseline, Hidden, Drawer } from '@material-ui/core';
 import { allUser } from './../../services/firebase';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class ListaUsuarios extends Component {
     state = {
@@ -28,7 +29,7 @@ export default class ListaUsuarios extends Component {
             <div>
                 <h1>Listado {itemss}</h1>
                 {
-                    items &&
+                    items ?
                     items.map((item, key)  => {
                         return (
                             <ListItem button key={key}>
@@ -39,6 +40,10 @@ export default class ListaUsuarios extends Component {
                             </ListItem>
                         )
                     })
+                    :
+                    <div>
+                    <CircularProgress />
+                    </div>
                 }
             </div>
         );
