@@ -66,4 +66,8 @@ export const postTorneo = (torneo)=>{
   return db.collection('torneos').add(torneo);
 }
 
+export const showTorneoImages =()=>{
+  return db.collection('torneos');
+}
+
 
