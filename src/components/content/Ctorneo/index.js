@@ -35,7 +35,6 @@ const myStyle = new makeStyles(theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
         padding: theme.spacing(3),
-        minWidth: '45%'
     },
     button: {
         margin: theme.spacing(1),
@@ -87,7 +86,7 @@ const myStyle = new makeStyles(theme => ({
         margin: 10,
         width: '80%',
         height: 200,
-        objectFit: 'none'
+        objectFit: 'scale-down'
     },
     menu: {
         width: 200,
@@ -110,6 +109,7 @@ function Ctorneo() {
     const [files, setFile] = React.useState(null);
     const [gamesOption, setGameOptions] = React.useState(null);
     const [open, setOpen] = React.useState(false);
+    const uid = sessionStorage.getItem("user");
     const steps = getSteps();
     useEffect(() => {
         getAllGames().onSnapshot((res) => {
@@ -128,7 +128,8 @@ function Ctorneo() {
             inicio: inicio,
             fin: fin,
             juego: game,
-            image: files
+            image: files,
+            organizador: uid
         };
         setOpen(true);
         postTorneo(torn).then((res) => {
@@ -183,7 +184,9 @@ function Ctorneo() {
                 );
             case 1:
                 return (
+                    
                     <Grid container justify="center" direction="column" alignItems="center" style={{ padding: '30px 0px' }}>
+                        <Paper className={classes.Paper}>
                         <form>
                             <Grid item>
                                 <TextField
@@ -267,7 +270,9 @@ function Ctorneo() {
                                 </Grid>
                             }
                         </form>
+                        </Paper>
                     </Grid>
+                    
                 );
             case 2:
                 return (

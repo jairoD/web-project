@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   makeStyles,
   useTheme,
@@ -25,6 +25,7 @@ import {
   allUser,
   addUser2,
   userChanges,
+  getUser,
   signout
 } from "./../../services/firebase";
 import ListaUsuarios from "./../../content/listado/index";
@@ -33,6 +34,8 @@ import Imagenes from "./../../content/preDetails/imagenes";
 import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
 import CTorneo from "./../../content/Ctorneo";
 import { Provider, Consumer } from "../../AuthContext";
+import HomeIcon from '@material-ui/icons/Home';
+import Torneos from './../../content/Torneos';
 
 const drawerWidth = 240;
 const myStyles = makeStyles(theme => ({
@@ -92,7 +95,7 @@ const myStyles = makeStyles(theme => ({
 }));
 
 function MainLayout(props) {
-  const signOut = (evt, setAuth) => {
+  const signOut = (e,setAuth) => {
     setAuth(false);
     sessionStorage.clear();
     signout();
@@ -101,30 +104,31 @@ function MainLayout(props) {
   const classes = myStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [show, setShow] = React.useState("listar");
-  const example = () => {
-    addUser2()
-      .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(function(error) {
-        console.error("Error adding document: ", error);
-      });
-  };
+  const [show, setShow] = React.useState("Inicio");
+  const [userInfo, setUserInfo] = React.useState(null);
+  const uid = sessionStorage.getItem("user");
+  useEffect(()=>{
+    getUser(uid).get().then(res=>{
+      setUserInfo(res)
+    });
+  },[userInfo]);
+  
   function changeShow(show) {
     switch (show) {
-      case "Mis torneos":
-        return <Imagenes/>;
-        break;
-      case "Editar perfil":
+      case "Inicio":
+        return <Imagenes />
+        return <p>tornos</p>
+      case "Mis Torneos":
+        return <Torneos />
+      case "Mis Equipos":
+        return <p>Mis equipos</p>
+      case "Editar Perfil":
         return <Perfil />;
-        break;
       case "Crear Torneo":
         return <CTorneo />;
-        break;
       default:
-        return <Imagenes/>;
-        break;
+        //return <Imagenes />
+        return <p>tornos</p>
     }
   }
   /*userChanges().onAuthStateChanged(function (user) {
@@ -135,80 +139,7 @@ function MainLayout(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar}>
-        <div className={classes.userInfoCont}>
-          <Typography subtitle1 className={classes.userName}>
-            Username
-          </Typography>
-        </div>
-      </div>
-
-      <List>
-        {/**
-                {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-                 */}
-        <ListItem
-          button
-          key={"Mis Torneos"}
-          value={"Mis Torneos"}
-          onClick={event => setShow(event.currentTarget.getAttribute("value"))}
-        >
-          <ListItemIcon>
-            <IconCup height="30px" width="30px" fill="black" />
-          </ListItemIcon>
-          <ListItemText primary="Mis Torneos" />
-        </ListItem>
-        <ListItem
-          button
-          key={"Mis Equipos"}
-          value={"Mis Equipos"}
-          onClick={event => setShow(event.currentTarget.getAttribute("value"))}
-        >
-          <ListItemIcon>
-            <IconTeam height="30px" width="30px" fill="black" />
-          </ListItemIcon>
-          <ListItemText primary="Mis Equipos" />
-        </ListItem>
-        <ListItem
-          button
-          key={"Crear Torneo"}
-          value={"Crear Torneo"}
-          onClick={event => setShow(event.currentTarget.getAttribute("value"))}
-        >
-          <ListItemIcon>
-            <CreateOutlinedIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText primary="Crear Torneo" />
-        </ListItem>
-        <ListItem
-          button
-          key={"Editar perfil"}
-          value={"Editar perfil"}
-          onClick={event => setShow(event.currentTarget.getAttribute("value"))}
-        >
-          <ListItemIcon>
-            <SettingsIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText primary="Editar Perfil" />
-        </ListItem>
-        <ListItem button key={"Cerrar sesión"}>
-          <ListItemIcon>
-            <ExitToAppIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText primary="Cerrar sesión" onClick={signout} />
-        </ListItem>
-      </List>
-    </div>
-  );
+ 
 
   return (
     <Consumer>
@@ -227,7 +158,7 @@ function MainLayout(props) {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap>
-                Responsive drawer
+                Kolyseum
               </Typography>
             </Toolbar>
           </AppBar>
@@ -251,11 +182,24 @@ function MainLayout(props) {
                   <div className={classes.toolbar}>
                     <div className={classes.userInfoCont}>
                       <Typography subtitle1 className={classes.userName}>
-                        Username
+                        {
+                          userInfo && userInfo.data().nombre
+                        }
                       </Typography>
                     </div>
                   </div>
                   <List>
+                    <ListItem
+                      button
+                      key={"Inicio"}
+                      value={"Inicio"}
+                      onClick={event => setShow(event.currentTarget.getAttribute("value"))}
+                    >
+                      <ListItemIcon>
+                        <HomeIcon className={classes.icon} />
+                      </ListItemIcon>
+                      <ListItemText primary="Inicio" />
+                    </ListItem>
                     <ListItem
                       button
                       key={"Mis Torneos"}
@@ -297,8 +241,8 @@ function MainLayout(props) {
                     </ListItem>
                     <ListItem
                       button
-                      key={"Editar perfil"}
-                      value={"Editar perfil"}
+                      key={"Editar Perfil"}
+                      value={"Editar Perfil"}
                       onClick={event =>
                         setShow(event.currentTarget.getAttribute("value"))
                       }
@@ -333,22 +277,25 @@ function MainLayout(props) {
                   <div className={classes.toolbar}>
                     <div className={classes.userInfoCont}>
                       <Typography subtitle1 className={classes.userName}>
-                        Username
+                      {
+                          userInfo && userInfo.data().nombre
+                        }
                       </Typography>
                     </div>
                   </div>
 
                   <List>
-                    {/**
-    {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-        <ListItem button key={text}>
-            <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-        </ListItem>
-    ))}
-     */}
+                    <ListItem
+                      button
+                      key={"Inicio"}
+                      value={"Inicio"}
+                      onClick={event => setShow(event.currentTarget.getAttribute("value"))}
+                    >
+                      <ListItemIcon>
+                        <HomeIcon className={classes.icon} />
+                      </ListItemIcon>
+                      <ListItemText primary="Inicio" />
+                    </ListItem>
                     <ListItem
                       button
                       key={"Mis Torneos"}
@@ -390,8 +337,8 @@ function MainLayout(props) {
                     </ListItem>
                     <ListItem
                       button
-                      key={"Editar perfil"}
-                      value={"Editar perfil"}
+                      key={"Editar Perfil"}
+                      value={"Editar Perfil"}
                       onClick={event =>
                         setShow(event.currentTarget.getAttribute("value"))
                       }
