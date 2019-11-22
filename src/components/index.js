@@ -10,7 +10,7 @@ import { Provider, Consumer } from './AuthContext';
 
 
 function App() {
-  const uid = sessionStorage.getItem("user");
+  
   /** 
   const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {

@@ -70,4 +70,12 @@ export const showTorneoImages =()=>{
   return db.collection('torneos');
 }
 
+export const torneos = (uid)=>{
+  return db.collection('torneos').where("organizador", "==", uid);
+}
+
+export const delTorneos = (uid)=>{
+  return db.collection('torneos').doc(uid).delete();
+}
+
 
