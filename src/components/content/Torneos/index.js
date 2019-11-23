@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { torneos, delTorneos, updateTorneo, getAllGames } from './../../services/firebase';
-import { GridList, GridListTile, Grid, Chip, Button, Paper, IconButton } from '@material-ui/core';
+import { GridList, GridListTile, Grid, Chip, Button, Paper, IconButton, Typography } from '@material-ui/core';
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -28,8 +28,8 @@ import {
 const myStyle = new makeStyles(theme => ({
     card: {
         maxWidth: 350,
-        maxHeight: 500,
-        minHeight: 500
+        maxHeight: 400,
+        minHeight: 400
     },
     textField: {
         width: '100%'
@@ -183,12 +183,12 @@ function Torneos() {
                             <Card className={classes.card}>
                                 <CardMedia className={classes.media} image={"" + item.data().image} />
                                 <CardContent>
-                                    <Grid container direction="column">
+                                    <Grid container direction="column" wrap="nowrap">
                                         <Grid item>
                                             <Chip label={item.data().juego} variant="outlined" />
                                         </Grid>
-                                        <Grid item>
-                                            <h2>{item.data().nombre}</h2>
+                                        <Grid item xs zeroMinWidth style={{padding:'8px 0px'}}>
+                                            <Typography variant="h6" noWrap>{item.data().nombre}</Typography>
                                         </Grid>
                                         <Grid item>
                                             <Chip icon={<EventIcon style={{ color: 'white' }} />} label={new Date(item.data().inicio.toDate()).toLocaleString()} style={{ backgroundColor: '#05a705', color: 'white' }} />
