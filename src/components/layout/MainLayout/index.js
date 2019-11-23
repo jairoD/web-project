@@ -117,7 +117,7 @@ function MainLayout(props) {
     switch (show) {
       case "Inicio":
         return <Imagenes />
-        return <p>tornos</p>
+        return<p> Torneo </p>
       case "Mis Torneos":
         return <Torneos />
       case "Mis Equipos":
@@ -127,8 +127,7 @@ function MainLayout(props) {
       case "Crear Torneo":
         return <CTorneo />;
       default:
-        //return <Imagenes />
-        return <p>tornos</p>
+        return<p> Torneo </p>
     }
   }
   /*userChanges().onAuthStateChanged(function (user) {

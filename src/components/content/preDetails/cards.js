@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import TodayIcon from "@material-ui/icons/Today";
 import ScheduleIcon from "@material-ui/icons/Schedule";
+import Grid from "@material-ui/core/Grid";
 
 class Cards extends Component {
   render() {
@@ -25,62 +26,70 @@ class Cards extends Component {
               title="Tournaments"
             />
             <CardContent>
+              <div>
+                <Button
+                  variant="outlined"
+                  buttonStyle={{ borderRadius: 50 }}
+                  style={{
+                    borderRadius: 50,
+                    padding: "2px 9px",
+                    color: "#1976d2"
+                  }}
+                  className={this.props.classes.button2}
+                >
+                  {this.props.juegoTorneo}
+                </Button>
+              </div>
+              <Grid item xs zeroMinWidth style={{ padding: "8px 0px" }}>
+                <Typography gutterBottom variant="h5" component="h2" noWrap>
+                  {this.props.nombreTorneo}
+                </Typography>
+              </Grid>
 
-            <div >
-            <Button
-              variant="outlined"
-              buttonStyle={{ borderRadius: 50 }}
-              style={{ borderRadius: 50, padding:"2px 9px", color:"#1976d2"}}
-              className={this.props.classes.button2}
-            >
-               {this.props.juegoTorneo}
-            </Button>
-            
-            </div>
-
-
-
-              <Typography gutterBottom variant="h5" component="h2">
-                {this.props.nombreTorneo}
-              </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 Lizards are a widespread group of squamate reptiles, with over
                 6,000 species, ranging across all continents except Antarctica
               </Typography>
             </CardContent>
-          </CardActionArea >
+          </CardActionArea>
 
-          <CardActions >
+          <CardActions>
             <IconButton aria-label="add to favorites">
               <TodayIcon />
             </IconButton>
 
-            <p className={this.props.classes.iconSideText} style={{ marginLeft: "-9px" }}>
+            <p
+              className={this.props.classes.iconSideText}
+              style={{ marginLeft: "-9px" }}
+            >
               {this.props.diaTorneo.getDate()}
               {"/"}
-              {this.props.diaTorneo.getMonth()+1}
+              {this.props.diaTorneo.getMonth() + 1}
               {"/"}
               {this.props.diaTorneo.getFullYear()}
             </p>
-            
+
             <IconButton aria-label="add to favorites">
               <ScheduleIcon />
-              </IconButton>
-            
-            <p className={this.props.classes.iconSideText} style={{ marginLeft: "-9px" }}>
-            {this.props.horaTorneo}
+            </IconButton>
+
+            <p
+              className={this.props.classes.iconSideText}
+              style={{ marginLeft: "-9px" }}
+            >
+              {this.props.horaTorneo}
             </p>
             <div style={{ marginLeft: "52px" }}>
-            <Button
-              secondary
-              buttonStyle={{ borderRadius: 50 }}
-              style={{ borderRadius: 50, padding:"2px 9px"}}
-              className={this.props.classes.button}
-            >
-              En {this.props.diasRestantes<=0 ? 0: this.props.diasRestantes}{" "}
-              {this.props.diasRestantes == 1 ? DIA : DIAS}
-            </Button>
-            
+              <Button
+                secondary
+                buttonStyle={{ borderRadius: 50 }}
+                style={{ borderRadius: 50, padding: "2px 9px" }}
+                className={this.props.classes.button}
+              >
+                En{" "}
+                {this.props.diasRestantes <= 0 ? 0 : this.props.diasRestantes}{" "}
+                {this.props.diasRestantes == 1 ? DIA : DIAS}
+              </Button>
             </div>
           </CardActions>
         </Card>
@@ -97,16 +106,16 @@ export default withStyles({
   media: {
     height: 140
   },
-  pleft:{
-    paddingRight: "52px",
+  pleft: {
+    paddingRight: "52px"
   },
   iconSideText: {
     fontWeight: "500",
     fontSize: "10px",
-    color: "#7e838c",
+    color: "#7e838c"
   },
-  div:{
-    paddingLeft: "5px",
+  div: {
+    paddingLeft: "5px"
   },
   button: {
     fontWeight: "500",
@@ -117,8 +126,13 @@ export default withStyles({
       backgroundColor: "#1976d2"
     }
   },
-
-  button2:{
+  textSize: {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    width: "250px"
+  },
+  button2: {
     fontWeight: "500",
     fontSize: "10px",
     color: "#fff"

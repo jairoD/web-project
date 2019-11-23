@@ -4,7 +4,6 @@ import Grid from "@material-ui/core/Grid";
 
 export default function ListCards(props) {
   const today = new Date();
-
   return (
     <div>
       <Grid container spacing={24} justify="center">
@@ -21,6 +20,7 @@ export default function ListCards(props) {
             seconds.toString().padStart(2, "0");
           let Difference_In_Time = date2.getTime() - today.getTime();
           let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
           return (
             <Cards
               images={imagen}

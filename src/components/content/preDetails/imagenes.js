@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { Carousel } from "react-responsive-carousel";
-import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-material-ui-carousel';
 import Spinner from "react-spinner-material";
 import { withStyles } from "@material-ui/core";
 import ListCards from "./listingCards";
-import {showTorneoImages} from './../../services/firebase';
+import { showTorneoImages } from "./../../services/firebase";
 
 class Imagenes extends Component {
   state = {
     imagenes: [],
     timePassed: false,
-    OrganizarPorFechas:[]
+    OrganizarPorFechas: []
   };
 
   componentDidMount() {
@@ -19,7 +18,6 @@ class Imagenes extends Component {
       .then(snapShots => {
         this.setState({
           imagenes: snapShots.docs.map(doc => {
-            console.log(doc.data().image);
             return {
               id: doc.id,
               data: doc.data()
@@ -30,7 +28,11 @@ class Imagenes extends Component {
       .catch(error => {
         console.log(error);
       });
-      showTorneoImages().orderBy('inicio','asc').limit(5).get().then(snapShots => {
+    showTorneoImages()
+      .orderBy("inicio", "asc")
+      .limit(5)
+      .get()
+      .then(snapShots => {
         this.setState({
           OrganizarPorFechas: snapShots.docs.map(doc => {
             return {
@@ -39,14 +41,15 @@ class Imagenes extends Component {
             };
           })
         });
-      }).catch(error => {
+      })
+      .catch(error => {
         console.log(error);
       });
   }
 
   render() {
     const { imagenes } = this.state;
-    const { OrganizarPorFechas }=this.state;
+    const { OrganizarPorFechas } = this.state;
     const carousel = () => {
       setTimeout(() => {
         this.setState({ timePassed: true });
@@ -65,21 +68,22 @@ class Imagenes extends Component {
       } else {
         return (
           <div>
-            <Carousel
-              autoPlay={true}
-              stopOnHover={false}
-              showThumbs={false}
-              transitionTime={1000}
-            >
-              {OrganizarPorFechas &&
-                OrganizarPorFechas.map((image, index = 0) => {
-                  return (
-                    <div key={index++}>
-                      <img src={image.data.image} key={index++} height="600px" alt="carouselImages"/>
-                    </div>
-                  );
-                })}
-            </Carousel>
+              <Carousel autoPlay={false}>
+                {OrganizarPorFechas &&
+                  OrganizarPorFechas.map((image, index = 0) => {
+                    return (
+                      <div key={index++}>
+                        <img
+                          src={image.data.image}
+                          key={index++}
+                          height="400px"
+                          width="100%"
+                          alt=""
+                        />
+                      </div>
+                    );
+                  })}
+              </Carousel>
             <ListCards images={imagenes} />
           </div>
         );
@@ -91,8 +95,8 @@ class Imagenes extends Component {
 export default withStyles({
   center: {
     position: "absolute",
-    left: "50%",
-    top: "50%",
+    left: "55%",
+    top: "53%",
     transform: "translate(-50%, -50%)"
   }
 })(Imagenes);
