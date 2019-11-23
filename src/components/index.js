@@ -28,7 +28,9 @@ function App() {
   }
   */
   return (
+    
     <div>
+      <ReactNotification />
       <Provider>
         <Consumer>
           {({ isAuth }) => (

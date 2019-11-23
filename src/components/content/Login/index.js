@@ -91,7 +91,11 @@ const notification = {
     type: "success",
     container: "top-right",
     animationIn: ["animated", "fadeIn"],
-    animationOut: ["animated", "fadeOut"]
+    animationOut: ["animated", "fadeOut"],
+    dismiss: {
+        duration: 5000,
+        onScreen: true
+      }
 };
 function LoginComponent(props) {
     const classes = myStyle();
