@@ -6,7 +6,7 @@ import { Provider, Consumer } from '../../AuthContext';
 function Index2(props) {
     return (
         <BrowserRouter>
-        { ('Ruta de logeados')}
+        
             <Route exact path="/home" render={() => <MainLayout  />} />
             <Route exact path="/login">
                 <Redirect to={{
