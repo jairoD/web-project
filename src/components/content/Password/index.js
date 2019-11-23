@@ -81,7 +81,7 @@ const notification = {
     animationOut: ["animated", "fadeOut"]
 };
 function sweetalertfunction() {
-    console.log('button clicked')
+    
     swal("Revise su email", "en pocos minutos su contraseña será enviada", "success");
 
 }
@@ -100,7 +100,7 @@ function PasswordRecovery() {
         evt.preventDefault();
         setLoading(true);
         if (email !== '') {
-            console.log(email);
+            
             passwordRecovery(email)
                 .then(user => {
                     swal("Revise su email", "en pocos minutos su contraseña será enviada", "success");

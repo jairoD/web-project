@@ -26,7 +26,7 @@ class Imagenes extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+         
       });
     showTorneoImages()
       .orderBy("inicio", "asc")
@@ -43,7 +43,7 @@ class Imagenes extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+         
       });
   }
 

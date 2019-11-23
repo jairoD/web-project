@@ -6,7 +6,7 @@ import { Provider, Consumer } from '../../AuthContext';
 function Index2(props) {
     return (
         <BrowserRouter>
-        {console.log('Ruta de logeados')}
+        { ('Ruta de logeados')}
             <Route exact path="/home" render={() => <MainLayout  />} />
             <Route exact path="/login">
                 <Redirect to={{
@@ -33,7 +33,7 @@ export default Index2;
 
 {/** 
         <BrowserRouter>
-        {console.log('usuario storage')}
+        { ('usuario storage')}
             <Route exact path="/home" render={() => <MainLayout setAuthentication={props.setAuthentication} />} />
             <Route exact path="/login">
                 <Redirect to={{

@@ -8,7 +8,7 @@ import PasswordRecovery from '../../content/Password';
 function LoginLayout(props) {
     return (
         <BrowserRouter>
-            {console.log('Ruta no logeados')}
+            { ('Ruta no logeados')}
             <Route exact path="/" render={() => <IndexLayout />} />
             <Route exact path="/home">
                 <Redirect to={{
@@ -28,7 +28,7 @@ function LoginLayout(props) {
 export default LoginLayout;
 {/** 
             <BrowserRouter>
-            {console.log('usuario no storage')}
+            { ('usuario no storage')}
                 <Route exact path="/" render={() => <IndexLayout />} />
                 <Route exact path="/home">
                     <Redirect to={{

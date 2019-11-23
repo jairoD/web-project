@@ -112,11 +112,10 @@ function Ctorneo() {
     const uid = sessionStorage.getItem("user");
     const steps = getSteps();
     useEffect(() => {
-        getAllGames().onSnapshot((res) => {
+        getAllGames().get().then((res) => {
             const aux = []
             res.forEach((doc) => {
                 aux.push(doc);
-                console.log(doc);
             });
             setGameOptions(aux);
         });
@@ -133,11 +132,11 @@ function Ctorneo() {
         };
         setOpen(true);
         postTorneo(torn).then((res) => {
-            console.log('creado, id:' + res.id);
+            
             setOpen(false);
             handleNext();
         }).catch((res) => {
-            console.log(res);
+            
         });
     }
     const handleUploaded = e => {
@@ -339,7 +338,7 @@ function Ctorneo() {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     };
     useEffect(() => {
-        console.log(game);
+        
     }, [game]);
 
     return (

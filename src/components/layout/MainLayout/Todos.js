@@ -19,7 +19,7 @@ import Paper from '@material-ui/core/Paper';
     allUser().then(snapShots=>{
         this.setState({
             nombres:snapShots.docs.map(doc =>{
-                //console.log(doc.data());
+                // (doc.data());
                 return{
                     id: doc.id,
                     data: doc.data()
@@ -27,7 +27,7 @@ import Paper from '@material-ui/core/Paper';
             })
         })
     }).catch(error=>{
-        console.log(error);
+         (error);
     })
   }
     render() {

@@ -105,17 +105,17 @@ function Torneos() {
     const [game, setGame] = React.useState(null);
     const [up, setUp] = React.useState(false);
     useEffect(() => {
-        getAllGames().onSnapshot((res) => {
+        getAllGames().get().then((res) => {
             const aux = []
             res.forEach((doc) => {
                 aux.push(doc);
-                console.log(doc);
+                
             });
             setGameOptions(aux);
         });
     }, []);
     useEffect(() => {
-        torneos(uid).onSnapshot((res) => {
+        torneos(uid).get().then((res) => {
             var aux = []
             res.forEach((doc) => {
                 aux.push(doc)
