@@ -207,7 +207,7 @@ function CEquipo() {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Crear torneo"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Crear Equipo"}</DialogTitle>
                 <DialogContent>
                     {up ? <Grid item>
                         <CircularProgress />

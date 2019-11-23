@@ -1,0 +1,80 @@
+[debug] [2019-11-23T13:19:32.741Z] ----------------------------------------------------------------------
+[debug] [2019-11-23T13:19:32.745Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Jairo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --debug
+[debug] [2019-11-23T13:19:32.773Z] CLI Version:   7.8.0
+[debug] [2019-11-23T13:19:32.774Z] Platform:      win32
+[debug] [2019-11-23T13:19:32.775Z] Node Version:  v10.15.0
+[debug] [2019-11-23T13:19:32.777Z] Time:          Sat Nov 23 2019 08:19:32 GMT-0500 (GMT-05:00)
+[debug] [2019-11-23T13:19:32.778Z] ----------------------------------------------------------------------
+[debug] [2019-11-23T13:19:32.779Z] 
+[debug] [2019-11-23T13:19:32.869Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-23T13:19:32.893Z] > authorizing via signed-in user
+[debug] [2019-11-23T13:19:32.895Z] [iam] checking project kolyseum-57cd1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-11-23T13:19:32.926Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/kolyseum-57cd1:testIamPermissions  
+
+[debug] [2019-11-23T13:19:33.631Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-23T13:19:33.636Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/kolyseum-57cd1  
+ 
+[debug] [2019-11-23T13:19:34.077Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'kolyseum-57cd1'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-11-23T13:19:34.090Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/kolyseum-57cd1/versions  
+
+[debug] [2019-11-23T13:19:35.450Z] <<< HTTP RESPONSE 200
+[info] i  hosting[kolyseum-57cd1]: beginning deploy...
+[info] i  hosting[kolyseum-57cd1]: found 22 files in build
+[debug] [2019-11-23T13:19:35.554Z] [hosting] hash cache [YnVpbGQ] stored for 22 files
+[debug] [2019-11-23T13:19:35.584Z] [hosting][hash queue][FINAL]
+[debug] [2019-11-23T13:19:35.585Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/kolyseum-57cd1/versions/1455491660b0c69c:populateFiles  
+ <request body omitted>
+[debug] [2019-11-23T13:19:36.880Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-23T13:19:36.887Z] [hosting][populate queue][FINAL]
+[debug] [2019-11-23T13:19:36.930Z] [hosting] uploads queued: 5
+[debug] [2019-11-23T13:19:37.287Z] [uploadQueue] Retrying task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331
+[debug] [2019-11-23T13:19:37.288Z] [uploadQueue] Retrying task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a
+[debug] [2019-11-23T13:19:37.289Z] [uploadQueue] Retrying task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b
+[debug] [2019-11-23T13:19:37.341Z] [uploadQueue] Retrying task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9
+[debug] [2019-11-23T13:19:37.344Z] [uploadQueue] Retrying task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507
+[info] i  hosting: uploading new files [0/5] (0%)
+[debug] [2019-11-23T13:19:38.223Z] [uploadQueue] Retrying task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331
+[debug] [2019-11-23T13:19:38.224Z] [uploadQueue] Retrying task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a
+[debug] [2019-11-23T13:19:38.226Z] [uploadQueue] Retrying task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b
+[debug] [2019-11-23T13:19:38.351Z] [uploadQueue] Retrying task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9
+[debug] [2019-11-23T13:19:38.422Z] [uploadQueue] Retrying task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507
+[info] i  hosting: uploading new files [0/5] (0%)
+[debug] [2019-11-23T13:19:40.025Z] [uploadQueue] Retrying task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331
+[debug] [2019-11-23T13:19:40.026Z] [uploadQueue] Retrying task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a
+[debug] [2019-11-23T13:19:40.027Z] [uploadQueue] Retrying task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b
+[debug] [2019-11-23T13:19:40.071Z] [uploadQueue] Retrying task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9
+[debug] [2019-11-23T13:19:40.073Z] [uploadQueue] Retrying task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507
+[info] i  hosting: uploading new files [0/5] (0%)
+[debug] [2019-11-23T13:19:43.275Z] [uploadQueue] Retrying task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331
+[debug] [2019-11-23T13:19:43.567Z] [uploadQueue] Retrying task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a
+[debug] [2019-11-23T13:19:43.568Z] [uploadQueue] Retrying task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b
+[debug] [2019-11-23T13:19:43.569Z] [uploadQueue] Retrying task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9
+[debug] [2019-11-23T13:19:43.570Z] [uploadQueue] Retrying task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507
+[info] i  hosting: uploading new files [0/5] (0%)
+[info] i  hosting: uploading new files [0/5] (0%)
+[info] i  hosting: uploading new files [0/5] (0%)
+[info] i  hosting: uploading new files [0/5] (0%)
+[debug] [2019-11-23T13:19:49.972Z] [uploadQueue] Retrying task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331
+[debug] [2019-11-23T13:19:49.974Z] [uploadQueue] Retrying task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a
+[debug] [2019-11-23T13:19:49.976Z] [uploadQueue] Retrying task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b
+[debug] [2019-11-23T13:19:50.016Z] [uploadQueue] Retrying task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9
+[debug] [2019-11-23T13:19:50.017Z] [uploadQueue] Retrying task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507
+[debug] [2019-11-23T13:19:50.019Z] FirebaseError: Task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331 failed: retries exhausted after 6 attempts
+[debug] [2019-11-23T13:19:50.021Z] FirebaseError: Task 53d2dcecb15666b4f7db4041361d3b6ea115483937dd38b66216deda98adaa4a failed: retries exhausted after 6 attempts
+[debug] [2019-11-23T13:19:50.022Z] FirebaseError: Task 3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b failed: retries exhausted after 6 attempts
+[debug] [2019-11-23T13:19:50.024Z] FirebaseError: Task eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9 failed: retries exhausted after 6 attempts
+[debug] [2019-11-23T13:19:50.025Z] FirebaseError: Task 553cf14a22d8166508701304c26b9ecbd07312273e8163b817b6d4f23bec8507 failed: retries exhausted after 6 attempts
+[debug] [2019-11-23T13:19:50.027Z] [hosting][upload queue][FINAL]
+[debug] [2019-11-23T13:19:50.414Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received type undefined
+    at assertPath (path.js:39:11)
+    at Object.resolve (path.js:166:7)
+    at Uploader._zipStream (C:\Users\Jairo\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\hosting\uploader.js:206:41)
+    at C:\Users\Jairo\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\hosting\uploader.js:186:22
+    at new Promise (<anonymous>)
+    at C:\Users\Jairo\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\hosting\uploader.js:185:20
+[error] 
+[error] Error: Task ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331 failed: retries exhausted after 6 attempts
