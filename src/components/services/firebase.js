@@ -78,4 +78,8 @@ export const delTorneos = (uid)=>{
   return db.collection('torneos').doc(uid).delete();
 }
 
+export const updateTorneo = (uid) =>{
+  return db.collection('torneos').doc(uid);
+}
+
 
