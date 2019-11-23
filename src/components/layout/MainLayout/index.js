@@ -36,6 +36,7 @@ import CTorneo from "./../../content/Ctorneo";
 import { Provider, Consumer } from "../../AuthContext";
 import HomeIcon from '@material-ui/icons/Home';
 import Torneos from './../../content/Torneos';
+import CEquipo from "./../../content/CEquipo";
 
 const drawerWidth = 240;
 const myStyles = makeStyles(theme => ({
@@ -121,17 +122,17 @@ function MainLayout(props) {
       case "Mis Torneos":
         return <Torneos />
       case "Mis Equipos":
-        return <p>Mis equipos</p>
+        return <CEquipo />
       case "Editar Perfil":
         return <Perfil />;
       case "Crear Torneo":
         return <CTorneo />;
       default:
-        return<p> Torneo </p>
+        return <Imagenes/>
     }
   }
   /*userChanges().onAuthStateChanged(function (user) {
-        console.log(user.uid)
+         (user.uid)
     });*/
 
   const handleDrawerToggle = () => {

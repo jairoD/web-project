@@ -78,8 +78,24 @@ export const delTorneos = (uid)=>{
   return db.collection('torneos').doc(uid).delete();
 }
 
+export const delEquipo = (uid) =>{
+  return db.collection('Equipos').doc(uid).delete();
+}
+
 export const updateTorneo = (uid) =>{
   return db.collection('torneos').doc(uid);
+}
+
+export const matchUser = (correo) =>{
+  return db.collection('usuarios').where("correo",">=",correo);
+}
+
+export const postEquipo = (equipo) =>{
+  return db.collection('Equipos').add(equipo);
+}
+
+export const getEquipos = (uid) =>{
+  return db.collection("Equipos").where("lider", "==", uid);
 }
 
 

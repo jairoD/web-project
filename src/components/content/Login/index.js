@@ -108,7 +108,7 @@ function LoginComponent(props) {
                     ...notification,
                     message: 'Bienvenido: ' + u.user.uid
                 })
-                console.log(u.user.uid);
+                 (u.user.uid);
                 sessionStorage.setItem('user', u.user.uid);
                 setAuth(true);
             })
@@ -137,10 +137,10 @@ function LoginComponent(props) {
                     })
                 }
 
-                console.log(error);
+                 
             })
-        console.log(correo);
-        console.log(contra);
+         (correo);
+         
     }
 
     return (

@@ -131,7 +131,7 @@ function SiginComponent(props) {
                     props.setAuthentication(true);
                     sessionStorage.setItem('user',u.user.uid);
                 }).catch((error)=>{
-                    console.log(error);
+                    
                 });
             }).catch(error => {
                 var errorCode = error.code;

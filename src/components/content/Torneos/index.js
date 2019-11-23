@@ -109,7 +109,7 @@ function Torneos() {
             const aux = []
             res.forEach((doc) => {
                 aux.push(doc);
-                console.log(doc);
+                
             });
             setGameOptions(aux);
         });
