@@ -82,7 +82,7 @@ function CEquipo() {
     const [up, setUp] = React.useState(false);
 
     useEffect(() => {
-        getUser(uid).get().then(res => {
+        getUser(uid).get().then((res) => {
             setInfo(res);
         });
     }, []);
@@ -119,9 +119,9 @@ function CEquipo() {
         };
         postEquipo(equipo).then(res => {
             setNombre('');
-            setMiembro(null);
+            setMiembro('');
             setMiembros(null);
-            setIntegrantes(null);
+            setIntegrantes([]);
             setUp(false);
             handleClose();
         })
@@ -174,12 +174,13 @@ function CEquipo() {
                                             <Avatar alt="perfilprev" src={item.data().logo} className={classes.bigAvatar} />
                                         </div>
                                     </Grid>
-                                    <Grid item className={classes.item}>
-                                        <Typography variant="h6" noWrap>{item.data().nombre}</Typography>
-                                    </Grid>
-                                    <Grid item className={classes.item}>
+                                    
+                                    {
+                                        userInfo &&
+                                        <Grid item className={classes.item}>
                                         <Typography variant="subtitle1" noWrap>Lider: {userInfo.data().nombre}</Typography>
                                     </Grid>
+                                    }
                                     <Grid item className={classes.item}>
                                         <Typography variant="subtitle1" noWrap style={{ textAlign: 'start' }}>Integrantes:</Typography>
                                     </Grid>
